@@ -1,0 +1,31 @@
+동빈나
+깃허브 사용법 DAY1
+링크: https://www.youtube.com/watch?v=ys0lVeTHl7c&list=PLRx0vPvlEmdD5FLIdwTM4mKBgyjv4no81&index=15
+
+깃허브 시작.
+깃 다운
+git config --global user.name ~~(내 닉네임)
+git config --global user.email ~~(내 메일주소)
+git clone ~~(내 github 주소 ~~.git)
+git add ~(파일 이름)
+git commit -m "~~(저장할때 그 관련 정보?)"
+git push
+
+다른 사람 git 가져오는 법
+git fetch
+git merge
+
+두개 합쳐서 git pull
+저장소: repositary(repo)
+
+git status: 상태 확인 명령어
+
+git reset ~~(파일명) : add 해서 staging area에 올라간 파일 다시 리셋
+git add . 이렇게 올리면 수정 파일이 모두 staging area에 올라감
+
+git checkout -- ~~(파일명) : status 통해 알게된 업데이트 항목을 원래 상태(이전 변경 전)로 돌리는 것
+
+
+
+
+
