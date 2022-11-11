@@ -79,7 +79,7 @@ git branch -d ~~(브랜치 명)
 develop 브랜치에서 코드를 넣고, add, commit 진행 후
 master 브랜치로 시점을 변경한 뒤 master 브랜치에서 코드를 추가하고 merge를 진행한다.
 그러면 conflict가 발생한다. 그 파일을 열어보면 어떤 부분이 충돌이 일어났는지 보여준다.
-
+ 
 충돌된 부분을 수정하고, 다시 git add . , git commit -m " ~ "
 하면 충돌이 일어나지 않고, git push하면 끝이난다.
 
@@ -201,6 +201,57 @@ git rebase -i HEAD~3
 git rebase는 명령어가 매우 많기에 개인적으로 공부를 더 하는것을 추천한다.
 
 
+
+Git config 환경설정 알아보기
+최신 리눅스는 git이 깔려있다.. 왜지?
+git config --list
+: 현재 깃 설정이 어떻게 되어있는지 알 수 있다.
+
+git config --global user.name(user.email) "~~(이름이나 이메일)"
+
+git init
+: 하나의 깃 프로젝트를 만들기
+
+특정 커밋을 수정하고 싶다면 그 커밋 이전 버전의 커밋의 해쉬값을 복사한 뒤
+git rebase -i ~~(해쉬값)
+그러면 rebase 에디터가 열린다.
+수정을 원하는 커밋에 pick -> edit 으로 수정한뒤 :wq!로 나온다.
+GIT_COMMITER_DATE="Oct 1 10:00:00 2018 +0000" git commit --amend --no-edit --date "Oct 1 10:00:00 2018 +0000" 
+: 2018년 10월 1일 10시로 커밋 시간을 수정 - 요일에 대한 정보를 넣지 않아도 자동으로 됨.
+
+그 후
+git rebase --continue
+: 그 옵션 변경한 것을 저장, 반영한다는 것
+
+
+두번째 방법은
+git filter 방법인데.
+git filter-branch -f(강제로 수행하게 하는거) --env-filter \
+'if [ $GIT_COMMIT = ~~(해쉬값) ]
+then 
+export GIT_AUTHOR_DATE="MON OCT 1 10:00:00 2018 +0000"
+export GIT_COMMITER_DATE="MON OCT 1 10:00:00 2018 +0000" 
+fi'
+
+이렇게 수정하면 된다. 프로젝트가 커질수록 부하가 커진다.
+if문 중간에 들어가는 공백 space가 없으면 오류가 걸리니 주의.
+
+중간의 커밋 날짜를 바꾸면 그 이후 커밋들의 해쉬값이 전부 바뀐다. 
+
+깃 commiter를 수정하는 방법도 동일하다.
+귀찮으니 url:
+https://www.youtube.com/watch?v=ys0lVeTHl7c&list=PLRx0vPvlEmdD5FLIdwTM4mKBgyjv4no81&index=15
+10:15로 이동해서 보면될듯 하다.
+
+새로운 repo를 git에서 만든 후 
+git remote add origin ~~(git 주소 ~~.git)
+: 원격 뭐시기로 설정.
+
+git push
+: 뭐지
+ 
+git push --set-upstream origin master
+: 뭘까
 
 
 
